@@ -16,7 +16,7 @@ app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, "../kpm-ui/build")));
 
 //Get IP Address
-app.get("/ipaddress", function (req, res) {
+app.get("/wifi/ipaddress", function (req, res) {
   for (const name of Object.keys(nets)) {
     for (const net of nets[name]) {
       // Skip over non-IPv4 and internal (i.e. 127.0.0.1) addresses

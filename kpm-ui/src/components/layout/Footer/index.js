@@ -1,10 +1,10 @@
 import React from "react";
 
-const Footer = ({path}) => {
+const Footer = ({ip, path}) => {
   return (
     <>
       <div className="footer__ip__text montserrat-normal-white-13px">
-        IP Address {path}
+        IP Address {ip}
       </div>
       <div className="footer__kpm-screen__text montserrat-normal-white-13px">
         KPM Screen

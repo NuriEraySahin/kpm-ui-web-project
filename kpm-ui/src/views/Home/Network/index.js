@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 
-import Keyboard from "../../../components/widget/Keyboard";
 import { networkScan } from "../../../services/WifiService"
 
 const sidebar__arrow__up__icon = require("../../../assets/img/-st-ok-1@2x.svg");
@@ -25,7 +24,7 @@ const Network = () => {
 
       const networkArr = []
       for(let i = 0; i < response.length; i++){
-        wifiObj = {
+        let wifiObj = {
           id: i,
           ssid: response[i].ssid,
           bssid: response[i].bssid

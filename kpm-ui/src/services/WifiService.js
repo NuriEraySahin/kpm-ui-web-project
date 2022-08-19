@@ -1,6 +1,12 @@
 
 export async function networkScan() {
-    const response = await fetch('/networks');
+    const response = await fetch('/wifi/networks');
+    return await response.json();
+}
+
+
+export async function getIpAddress() {
+    const response = await fetch('/wifi/ipaddress');
     return await response.json();
 }
 
