@@ -4,7 +4,7 @@ const Footer = ({ip, path}) => {
   return (
     <>
       <div className="footer__ip__text montserrat-normal-white-13px">
-        IP Address {ip}
+        {ip}
       </div>
       <div className="footer__kpm-screen__text montserrat-normal-white-13px">
         KPM Screen

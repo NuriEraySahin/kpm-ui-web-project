@@ -31,9 +31,8 @@ const Network = () => {
         }
 
         networkArr.push(wifiObj)
-      }
-      console.log(networkArr);
-      // setWifiArray()
+      }      
+      setWifiArray(networkArr)
   });
     
     
@@ -134,7 +133,7 @@ const Network = () => {
           {wifiIndex === -1 ? (
             wifiArray
               .slice(boundry.start, boundry.end + 1)
-              .map((el) => <Item key={wifiArray.findIndex(el)} item={wifiArray.findIndex(el)} />)
+              .map((el) => <Item key={el.id} item={el.id} />)
           ) : (
             <Detail />
           )}

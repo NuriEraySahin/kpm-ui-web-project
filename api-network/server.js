@@ -1,5 +1,4 @@
 const express = require("express");
-const bodyParser = require("body-parser");
 var piWifi = require("pi-wifi");
 
 const { networkInterfaces } = require("os");
