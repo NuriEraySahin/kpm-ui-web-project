@@ -1,0 +1,66 @@
+@import url("https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css");
+
+@import url("https://fonts.googleapis.com/css?family=Montserrat:400,600");
+/* @font-face {
+  font-family: "Segoe UI-Regular";
+  font-style: normal;
+  font-weight: 400;
+  src: url("../../public/static/fonts/segoe-ui.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Segoe UI-Bold";
+  font-style: normal;
+  font-weight: 700;
+  src: url("../../public/static/fonts/segoeuib.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Myriad Pro-Regular";
+  font-style: normal;
+  font-weight: 400;
+  src: url("../../public/static/fonts/Myriad-Pro_31655.ttf") format("truetype");
+} */
+
+/* The following line is used to measure usage of this code in production. For more info see our usage billing page */
+@import url("https://px.animaapp.com/6206713e11dc59f260c2df18.62135901228b81c36e44bdef.G8jruEX.rcp.png");
+
+.screen a {
+  display: contents;
+  text-decoration: none;
+}
+
+.container-center-horizontal {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  pointer-events: none;
+  width: 100%;
+}
+
+.container-center-horizontal > * {
+  flex-shrink: 0;
+  pointer-events: auto;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+
+/* 
+.control__page {
+  cursor: pointer;
+  height: 70px;
+  left: 0px;
+  position: absolute;
+  top: 125px;
+  width: 70px;
+} */
+
+
+.artboard-1-1 {
+  height: 35px;
+  left: 20px;
+  position: absolute;
+  top: 142px;
+  width: 35px;
+}

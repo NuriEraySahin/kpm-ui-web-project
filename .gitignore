@@ -1,0 +1,4 @@
+/api-network/node_modules
+/api-service/node_modules
+/kpm-ui/node_modules
+*/package-lock.json
