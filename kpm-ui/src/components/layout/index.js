@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-import { getIpAddress } from "../../../services/WifiService";
+import { getIpAddress } from "../../services/WifiService";
 
 import SideBar from "./SideBar";
 import Menu from "./Menu";
