@@ -1,16 +1,45 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+
+import Keyboard from "../../../components/widget/Keyboard";
+import { networkScan } from "../../../services/WifiService"
 
 const sidebar__arrow__up__icon = require("../../../assets/img/-st-ok-1@2x.svg");
 const sidebar__arrow__down__icon = require("../../../assets/img/alt-ok@2x.svg");
 const wifi__icon = require("../../../assets/img/9-wifi-2-1-1@2x.svg");
 
-const Network = () => {
-  const [wifiArray, setWifiArray] = useState([{id: 0, ssid: "TP-Link_2C24", bssid: "test_b_wifi"},{id: 1, ssid: "test_1_WiFi", bssid: "test_1_b_wifi"},{id: 2, ssid: "test_2_WiFi", bssid: "test_2_b_wifi"},{id: 3, ssid: "test_3_WiFi", bssid: "test_3_b_wifi"}]);
+
+
+const Network = () => { 
+
+  const [wifiArray, setWifiArray] = useState([]);
   const [wifiIndex, setWifiIndex] = useState(-1);
   const [boundry, setBoundry] = useState({
     start: 0,
     end: 2,
   });
+
+  useEffect(() => {
+    
+    networkScan()
+    .then(response => {
+
+      const networkArr = []
+      for(let i = 0; i < response.length; i++){
+        wifiObj = {
+          id: i,
+          ssid: response[i].ssid,
+          bssid: response[i].bssid
+        }
+
+        networkArr.push(wifiObj)
+      }
+      console.log(networkArr);
+      // setWifiArray()
+  });
+    
+    
+
+  }, [])
 
   const handleUp = () => {
     if (wifiIndex === -1) {
@@ -106,7 +135,7 @@ const Network = () => {
           {wifiIndex === -1 ? (
             wifiArray
               .slice(boundry.start, boundry.end + 1)
-              .map((el) => <Item key={el.id} item={el.id} />)
+              .map((el) => <Item key={wifiArray.findIndex(el)} item={wifiArray.findIndex(el)} />)
           ) : (
             <Detail />
           )}

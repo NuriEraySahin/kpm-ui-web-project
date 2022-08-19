@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Layout from "./components/layout";
 import Loader from "./components/widget/Loader";
 
+import Keyboard from "./components/widget/Keyboard";
 function App() {
 
   return (
