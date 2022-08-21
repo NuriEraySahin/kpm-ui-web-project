@@ -37,7 +37,6 @@ app.get("/wifi/ipaddress", function (req, res) {
 
 //Scan networks
 app.get("/wifi/networks", (req, res) => {
-  var response;
   piWifi.scan(function (err, networks) {
     if (err) {
       return console.error(err.message);
@@ -47,17 +46,30 @@ app.get("/wifi/networks", (req, res) => {
   });
 });
 
-//Connect to a wifi
-app.get("/wifi/connect", (req, res) => {
-  var ssid = req.query.ssid;
-  var pwd = req.query.pwd;
 
-  piWifi.connect(ssid, pwd, function (err) {
-    if (err) {
-      return console.error(err.message);
+// app.get("/wifi/connect", (req, res) => {
+//   var ssid = req.query.ssid;
+//   var pwd = req.query.pwd;
+
+//   piWifi.connect(ssid, pwd, function (err) {
+//     if (err) {
+//       return console.error(err.message);
+//     }
+//     console.log("Successful connection!");
+//   });
+// });
+
+//Connect to a wifi
+app.post('/wifi/connect', (req, res) => {
+  const creds = req.body.creds;
+  piWifi.connect(creds.ssid, creds.pwd, function (err) {
+    if (err) { 
+      console.log(err.message)     
+      res.json(err.message);
     }
     console.log("Successful connection!");
-  });
+    res.json("Connection establish!");
+  });  
 });
 
 //Get status

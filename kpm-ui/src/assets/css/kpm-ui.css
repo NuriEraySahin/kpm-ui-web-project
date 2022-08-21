@@ -1106,6 +1106,10 @@ input {
   border-bottom-left-radius: 5px;
 }
 
+/* .hg-layout-shift{
+  background-color: #1c4995 !important
+} */
+
 .simple-keyboard.darkTheme .hg-button {
   height: 42px;
   display: flex;
@@ -1113,6 +1117,30 @@ input {
   align-items: center;
   background: #343434;
   color: white;
+}
+
+.hg-button-caps {
+  background-color: #1c4995 !important;
+}
+
+.hg-button-abc {
+  width: 15% !important;
+}
+
+.hg-button-char_set {
+  width: 15% !important;
+}
+
+.hg-button-numbers {
+  width: 15% !important;
+}
+
+.hg-button-space {
+  width: 50% !important;
+}
+
+.hg-button-ent {
+  width: 20% !important;
 }
 
 .simple-keyboard.darkTheme .hg-button:active {

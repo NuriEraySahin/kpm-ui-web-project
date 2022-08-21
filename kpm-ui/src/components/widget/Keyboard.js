@@ -20,13 +20,13 @@ const Keyboard = ({ wifiObj }) => {
         "q w e r t y u i o p",
         "a s d f g h j k l",
         "{shift} z x c v b n m {backspace}",
-        "{numbers} {space} {ent}",
+        "{numbers} {char_set} {space} {ent}",
       ],
       shift: [
         "Q W E R T Y U I O P",
         "A S D F G H J K L",
-        "{shift} Z X C V B N M {backspace}",
-        "{numbers} {space} {ent}",
+        "{caps} Z X C V B N M {backspace}",
+        "{numbers} {char_set} {space} {ent}",
       ],
       numbers: [
         "1 2 3 4 5 6 7 8 9 0",
@@ -44,12 +44,12 @@ const Keyboard = ({ wifiObj }) => {
     display: {
       "{ent}": "Join",
       "{backspace}": "⌫",
-      "{capslock}": "caps lock ⇪",
       "{shift}": "⇧",
+      "{caps}": "⇧",
       "{numbers}": "123",
       "{abc}": "abc",
-      "{char_set}": "?#",
-      "{space}": "⎵"
+      "{char_set}": "#+=",
+      "{space}": "⎵",
     },
   };
 
@@ -58,52 +58,60 @@ const Keyboard = ({ wifiObj }) => {
       ...state,
       password: password,
     });
-    console.log("Input changed", password);
   };
 
   const onKeyPress = (button) => {
-    if (button === "{shift}" || "{abc}") handleShift();
-    if (button === "{numbers}") handleNumbers();
-    if (button === "{char_set}") handleCharSet();
-    if (button === "{ent}") handleConnect();
-  };
+    if (button === "{numbers}") {
+      setState({
+        ...state,
+        layoutName: "numbers",
+      });
+    }
 
-  const handleConnect = () => {
-    const params = new URLSearchParams({
-      ssid: wifiObj.ssid,
-      pwd: state.password
-    })
+    if (button === "{char_set}") {
+      setState({
+        ...state,
+        layoutName: "char_set",
+      });
+    }
 
-    connectNetwork(params.toString()).then(response => {
-      alert("Connected")
-    })
-  };
+    if (button === "{abc}") {
+      setState({
+        ...state,
+        layoutName: "default",
+      });
+    }
 
-  const handleShift = () => {
-    let layoutName = state.layoutName;
+    if (button === "{shift}") {
+      setState({
+        ...state,
+        layoutName: "shift",
+      });
+    }
 
-    setState({
-      ...state,
-      layoutName: layoutName === "default" ? "shift" : "default",
-    });
-  };
+    if (button === "{caps}") {
+      setState({
+        ...state,
+        layoutName: "default",
+      });
+    }
 
-  const handleNumbers = () => {
-    let layoutName = state.layoutName;
+    if (button === "{ent}") {
+      const creds = {
+        ssid: wifiObj.ssid,
+        pwd: state.password,
+      };
 
-    setState({
-      ...state,
-      layoutName: layoutName !== "numbers" ? "numbers" : "default",
-    });
-  };
-
-  const handleCharSet = () => {
-    let layoutName = state.layoutName;
-
-    setState({
-      ...state,
-      layoutName: layoutName !== "char_set" ? "char_set" : "default",
-    });
+      connectNetwork(creds)
+        .then((response) => {
+          console.log(response);
+          alert("Connected");
+        })
+        .catch((err) => {
+          console.error(err)
+          alert("Error");
+        });
+    }
   };
 
   const onChangeInput = (event) => {

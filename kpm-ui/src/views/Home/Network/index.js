@@ -115,12 +115,12 @@ const Network = ({ network, path }) => {
               <div className="rectangle-4-1-28 border-2px-silver-chalice"></div>
               <div
                 className={`connect-28 montserrat-normal-white-${
-                  wifiArray[wifiIndex].bssid === networkData.data.bssid
+                  wifiArray[wifiIndex].bssid === networkData.bssid
                     ? "17px"
                     : "15px"
                 }`}
               >
-                {wifiArray[wifiIndex].bssid === networkData.data.bssid
+                {wifiArray[wifiIndex].bssid === networkData.bssid
                   ? "Connected"
                   : "Connect"}
               </div>
@@ -151,7 +151,6 @@ const Network = ({ network, path }) => {
                 <Detail />
               )}
             </div>
-
             <img
               className="frame-15-2"
               src={sidebar__arrow__down__icon}
@@ -161,8 +160,8 @@ const Network = ({ network, path }) => {
         </div>
       ) : (
         <div className="keyboard__container">
-          <div class="overlap-group33-13-126">
-            <div class="wifi__description border-2px-silver-chalice">
+          <div className="overlap-group33-13-126">
+            <div className="wifi__description border-2px-silver-chalice">
               <div className="wifi__ssid__description montserrat-normal-white-15px">
                 SSID:{" "}
                 <div className="wifi__ssid__text montserrat-normal-white-13px">
