@@ -1,43 +1,42 @@
 import React, { useEffect, useState } from "react";
 
-import { networkScan } from "../../../services/WifiService"
+import Keyboard from "../../../components/widget/Keyboard";
+
+import { networkScan, getCurrentWifi } from "../../../services/WifiService";
 
 const sidebar__arrow__up__icon = require("../../../assets/img/-st-ok-1@2x.svg");
 const sidebar__arrow__down__icon = require("../../../assets/img/alt-ok@2x.svg");
 const wifi__icon = require("../../../assets/img/9-wifi-2-1-1@2x.svg");
 
-
-
-const Network = () => { 
-
+const Network = ({ network, path }) => {
+  const [networkData, setNetworkData] = useState({});
   const [wifiArray, setWifiArray] = useState([]);
   const [wifiIndex, setWifiIndex] = useState(-1);
+  const [keyboard, setKeyboard] = useState(false);
   const [boundry, setBoundry] = useState({
     start: 0,
     end: 2,
   });
 
   useEffect(() => {
-    
-    networkScan()
-    .then(response => {
+    getCurrentWifi().then((current) => {
+      setNetworkData(current);
+      networkScan().then((response) => {
+        const networkListArray = [];
 
-      const networkArr = []
-      for(let i = 0; i < response.length; i++){
-        let wifiObj = {
-          id: i,
-          ssid: response[i].ssid,
-          bssid: response[i].bssid
+        for (let i = 0; i < response.length; i++) {
+          let wifiObj = {
+            id: i,
+            ssid: response[i].ssid,
+            bssid: response[i].bssid,
+          };
+
+          networkListArray.push(wifiObj);
         }
-
-        networkArr.push(wifiObj)
-      }      
-      setWifiArray(networkArr)
-  });
-    
-    
-
-  }, [])
+        setWifiArray(networkListArray);
+      });
+    });
+  }, []);
 
   const handleUp = () => {
     if (wifiIndex === -1) {
@@ -76,7 +75,7 @@ const Network = () => {
           <img className="x9_-wifi-2-1-1" src={wifi__icon} />
           <div className="textContainer">
             <div className="kpm-network-1 montserrat-normal-white-17px">
-            {wifiArray[item].ssid}
+              {wifiArray[item].ssid}
             </div>
             <div className="kpm-network-1"></div>
           </div>
@@ -88,15 +87,16 @@ const Network = () => {
   const Detail = () => {
     return (
       <>
-        <div onClick={() => setWifiIndex(-1)} className="network__back__button__box border-2px-silver-chalice">
+        <div
+          onClick={() => setWifiIndex(-1)}
+          className="network__back__button__box border-2px-silver-chalice"
+        >
           <div className="network__back__button__text montserrat-normal-white-17px">
             Back
           </div>
         </div>
 
-        <div
-          className="flex-row-28 border-2px-silver-chalice"          
-        >
+        <div className="flex-row-28 border-2px-silver-chalice">
           <div className="flex-col-8">
             <img className="x9_-wifi-2-1-2-28" src={wifi__icon} />
             <p className="ip-address-1111111-28 montserrat-normal-white-13px">
@@ -105,13 +105,24 @@ const Network = () => {
           </div>
           <div className="flex-col-9-28">
             <div className="kpm-network-2-28 montserrat-semi-bold-white-17px">
-            {wifiArray[wifiIndex].ssid}
+              {wifiArray[wifiIndex].ssid}
             </div>
 
-            <div className="overlap-group-48-28">
+            <div
+              className="overlap-group-48-28"
+              onClick={() => setKeyboard(true)}
+            >
               <div className="rectangle-4-1-28 border-2px-silver-chalice"></div>
-              <div className="connect-28 montserrat-normal-white-17px">
-                Connect
+              <div
+                className={`connect-28 montserrat-normal-white-${
+                  wifiArray[wifiIndex].bssid === networkData.data.bssid
+                    ? "17px"
+                    : "15px"
+                }`}
+              >
+                {wifiArray[wifiIndex].bssid === networkData.data.bssid
+                  ? "Connected"
+                  : "Connect"}
               </div>
             </div>
           </div>
@@ -121,31 +132,57 @@ const Network = () => {
   };
 
   return (
-    <div className="network__container">
-      <div className="network__layout montserrat-normal-white-13px">
-        <img
-          className="frame-16"
-          src={sidebar__arrow__up__icon}
-          onClick={handleUp}
-        />
+    <>
+      {!keyboard ? (
+        <div className="network__container">
+          <div className="network__layout montserrat-normal-white-13px">
+            <img
+              className="frame-16"
+              src={sidebar__arrow__up__icon}
+              onClick={handleUp}
+            />
 
-        <div className="container">
-          {wifiIndex === -1 ? (
-            wifiArray
-              .slice(boundry.start, boundry.end + 1)
-              .map((el) => <Item key={el.id} item={el.id} />)
-          ) : (
-            <Detail />
-          )}
+            <div className="container">
+              {wifiIndex === -1 ? (
+                wifiArray
+                  .slice(boundry.start, boundry.end + 1)
+                  .map((el) => <Item key={el.id} item={el.id} />)
+              ) : (
+                <Detail />
+              )}
+            </div>
+
+            <img
+              className="frame-15-2"
+              src={sidebar__arrow__down__icon}
+              onClick={handleDown}
+            />
+          </div>
         </div>
-
-        <img
-          className="frame-15-2"
-          src={sidebar__arrow__down__icon}
-          onClick={handleDown}
-        />
-      </div>
-    </div>
+      ) : (
+        <div className="keyboard__container">
+          <div class="overlap-group33-13-126">
+            <div class="wifi__description border-2px-silver-chalice">
+              <div className="wifi__ssid__description montserrat-normal-white-15px">
+                SSID:{" "}
+                <div className="wifi__ssid__text montserrat-normal-white-13px">
+                  {wifiArray[wifiIndex].ssid}
+                </div>
+              </div>
+              <div
+                onClick={() => setKeyboard(false)}
+                className="wifi__connect__back__button__box border-2px-silver-chalice"
+              >
+                <div className="wifi__connect__back__button__text montserrat-normal-white-17px">
+                  Back
+                </div>
+              </div>
+            </div>
+          </div>
+          <Keyboard wifiObj={wifiIndex !== -1 && wifiArray[wifiIndex]} />
+        </div>
+      )}
+    </>
   );
 };
 

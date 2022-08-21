@@ -1071,3 +1071,141 @@
   top: 135px;
   width: 298px;
 }
+
+/*Keyboard CSS*/
+
+.keyboard__container {
+  height: 264px;
+  margin-top: 1px;
+  position: relative;
+  width: 407px;
+}
+
+input {
+  width: 100%;
+  height: 100px;
+  padding: 20px;
+  font-size: 20px;
+  border: none;
+  box-sizing: border-box;
+}
+
+.simple-keyboard {
+  width: 95%;
+  margin-top: 60px;
+  margin-left: 75px;
+}
+
+/*
+  Theme: darkTheme
+*/
+.simple-keyboard.darkTheme {
+  background-color: #454545;
+  border-radius: 0;
+  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+
+.simple-keyboard.darkTheme .hg-button {
+  height: 42px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #343434;
+  color: white;
+}
+
+.simple-keyboard.darkTheme .hg-button:active {
+  background: #1c4995;
+  color: white;
+}
+
+#root .simple-keyboard.darkTheme + .simple-keyboard-preview {
+  background: #1c4995;
+}
+
+/* Keyboard password input */
+
+.wifi__password__input:focus {
+  outline: none;
+}
+
+.wifi__password {
+  background-color: var(--eerie-black);
+  border: none;
+  border-radius: 7px;
+  height: 40px;
+  left: 80px;
+  position: absolute;
+  top: 50px;
+  width: 375px;
+}
+
+.wifi__password__input {
+  padding-left: 15px;
+  background: transparent;
+  border: none;
+  width: 375px;
+  height: 5px;
+  border-radius: 7px;
+  margin-left: 0px;
+  color: white;
+  font-size: large;
+}
+
+.wifi__description {
+  background-color: #454545;
+  border-radius: 7px;
+  height: 40px;
+  left: 67px;
+  position: absolute;
+  top: 0;
+  width: 400px;
+}
+
+.wifi__connect__back__button__box {
+  background-color: var(--fuscous-gray);
+  border-radius: 7px;
+  box-shadow: 0px 4px 4px #00000040;
+  cursor: pointer;
+  height: 28px;
+  right: 0;
+  margin-right: 5px;
+  position: absolute;
+  top: 0;
+  margin-top: 3px;
+  transition: all 0.2s ease;
+  width: 120px;
+}
+
+.wifi__connect__back__button__text {
+  right: 5px;
+  letter-spacing: 0;
+  position: absolute;
+  text-align: center;
+  top: 3px;
+  width: 101px;
+}
+
+.wifi__ssid__description {
+  margin-top: 10px;
+  margin-left: 5px;
+}
+
+.wifi__ssid__text {
+  display: flex;
+  text-align: center;
+  align-items: center;
+  margin-top: -25px;
+  margin-left: 45px;
+  width: 55%;
+  height: 35px;
+}
+
+.password__input__icon {
+  height: 30px;
+  right: 15px;
+  position: absolute;
+  top: 4px;
+  width: 25px;
+}

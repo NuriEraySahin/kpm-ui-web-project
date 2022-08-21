@@ -51,8 +51,6 @@ app.get("/wifi/networks", (req, res) => {
 app.get("/wifi/connect", (req, res) => {
   var ssid = req.query.ssid;
   var pwd = req.query.pwd;
-  //console.log("ssid: ",ssid);
-  //console.log("pwd: ",pwd);
 
   piWifi.connect(ssid, pwd, function (err) {
     if (err) {
@@ -72,22 +70,6 @@ app.get("/wifi/status", (req, res) => {
     res.end(JSON.stringify(status));
   });
 });
-
-// app.get('/wifi/users', (req, res) => {
-//   console.log('wifi/users called!')
-//   res.json(users);
-// });
-
-// app.post('/wifi/user', (req, res) => {
-//   const user = req.body.user;
-//   console.log('Adding user:::::', user);
-//   users.push(user);
-//   res.json("user added wifi");
-// });
-
-// app.get('/', (req,res) => {
-//   res.send(`<h1>API Running on the port ${port}</h1>`);
-// });
 
 app.listen(port, () => {
   console.log(`Server listening on the port::${port}`);

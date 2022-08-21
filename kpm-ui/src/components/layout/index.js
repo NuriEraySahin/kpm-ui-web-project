@@ -13,8 +13,6 @@ const Layout = ({ path }) => {
   useEffect(() => {
     getIpAddress().then((response) => {
       setIP(response.wlan0);
-
-      // setWifiArray()
     });
   }, []);
 

@@ -10,6 +10,17 @@ export async function getIpAddress() {
     return await response.json();
 }
 
+export async function getCurrentWifi() {
+    const response = await fetch('/wifi/status');
+    return await response.json();
+}
+
+export async function connectNetwork({params}) {
+    const response = await fetch(`/wifi/connect?${params.toString()}`);
+    return await response.json();
+}
+
+
 // export async function createUser(data) {
 //     const response = await fetch(`/wifi/user`, {
 //         method: 'POST',
